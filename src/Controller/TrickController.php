@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use App\Entity\Picture;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,6 +36,26 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $images = [];
+            foreach ($trick->getImages() as $image):
+                $picture = new Picture();
+                $picture->setName('nom de test');
+                $fileName = md5(uniqid()) .'.'.$image->guessExtension();
+                try {
+                  $image->move(
+                      $this->getParameter('image_directory'),
+                      $fileName
+                  );
+                  $picture->setPath($fileName);
+                  $picture->setTrick($trick);
+              } catch (FileException $e) {
+                  // ... handle exception if something happens during file upload
+              }
+              array_push($images, $picture);
+            endforeach;
+              $trick->setImages($images);
+
             $entityManager = $this->getDoctrine()->getManager();
             $trick->setDateCreate(new \DateTime());
             $entityManager->persist($trick);

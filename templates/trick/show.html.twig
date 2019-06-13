@@ -19,6 +19,13 @@
                 <th>Date_create</th>
                 <td>{{ trick.dateCreate ? trick.dateCreate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            
+            <tr>
+                <th>Image</th>
+
+                <td>{% for key, image in trick.images %} {{ image.name }} <img src="{{asset('uploads/'~image.path)}}"> {% endfor %}</td>
+            </tr>
+
         </tbody>
     </table>
 
