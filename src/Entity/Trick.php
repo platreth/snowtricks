@@ -38,6 +38,19 @@ class Trick
      */
     private $videos;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -135,6 +148,30 @@ class Trick
                 $video->setTrick(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

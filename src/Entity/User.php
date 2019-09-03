@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -51,8 +53,14 @@ class User implements UserInterface, \Serializable {
      */
     private $roles = array();
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="author", orphanRemoval=true)
+     */
+    private $tricks;
+
     public function __construct() {
         $this->isActive = true;
+        $this->tricks = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -144,6 +152,37 @@ class User implements UserInterface, \Serializable {
 
     function setIsActive($isActive) {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return Collection|Trick[]
+     */
+    public function getTricks(): Collection
+    {
+        return $this->tricks;
+    }
+
+    public function addTrick(Trick $trick): self
+    {
+        if (!$this->tricks->contains($trick)) {
+            $this->tricks[] = $trick;
+            $trick->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrick(Trick $trick): self
+    {
+        if ($this->tricks->contains($trick)) {
+            $this->tricks->removeElement($trick);
+            // set the owning side to null (unless already changed)
+            if ($trick->getAuthor() === $this) {
+                $trick->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 
 }

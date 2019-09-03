@@ -7,7 +7,6 @@
 
     {{ include('trick/_form.html.twig') }}
 
-    <a href="{{ path('trick_index') }}">back to list</a>
 {% endblock %}
 
  {% block javascripts %}
@@ -44,11 +43,45 @@
 	            addTagFormDeleteLink();
 
 	    });
+	    jQuery('.add-another-collection-widget-video').click(function (e) {
+	        var list = jQuery(jQuery(this).attr('data-list-selector'));
+	        // Try to find the counter of the list or use the length of the list
+	        var counter = list.data('widget-counter') | list.children().length;
+
+	        // grab the prototype template
+	        var newWidget = list.attr('data-prototype');
+	        // replace the "__name__" used in the id and name of the prototype
+	        // with a number that's unique to your emails
+	        // end name attribute looks like name="contact[emails][2]"
+	        newWidget = newWidget.replace(/__video__/g, counter);
+	        // Increase the counter
+	        counter++;
+	        // And store it, the length cannot be used if deleting widgets is allowed
+	        list.data('widget-counter', counter);
+
+	        newWidget = newWidget + '<button id="delete-image" type="button">Delete this tag</button>';
+	        // create a new list element and add it to the list
+	        var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+	        newElem.appendTo(list);
+	        // Get the ul that holds the collection of tags
+	        $collectionHolder = $('ul.tags');
+
+	        // add a delete link to all of the existing tag form li elements
+			addTagFormDeleteLinkVideo();
+
+	    });
 	});
 
 	function addTagFormDeleteLink() {
 
 	    $('body').off().on('click', '#delete-image' , function(e) {
+	    	$(this).parent().remove();
+	    	// $(this).remove();
+	    });
+	}
+	function addTagFormDeleteLinkVideo() {
+
+	    $('body').off().on('click', '#delete-video' , function(e) {
 	    	$(this).parent().remove();
 	    	// $(this).remove();
 	    });

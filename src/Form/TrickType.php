@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Trick;
 use App\Entity\Picture;
 use App\Entity\Video;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,10 +21,17 @@ class TrickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-        ;
-        $builder->add('images', CollectionType::class, [
-
+            ->add('name', \Symfony\Component\Form\Extension\Core\Type\TextType::class, [
+                'label' => 'Nom de la figure'
+            ])
+            ->add('category', EntityType::class, [
+                'label' => 'Catégorie',
+                'attr' => ['class' => 'mdb-select md-form colorful-select dropdown-primary'],
+                'class' => Category::class,
+                'choice_label' => 'name'
+        ])
+        ->add('images', CollectionType::class, [
+            'label' => 'Images(s)',
             'entry_type' => FileType::class,
             'entry_options' => array(
                 'constraints'  => array(
@@ -38,6 +48,26 @@ class TrickType extends AbstractType
                'allow_delete'   => true,
                'required' => true,
                'label' => 'image',
+
+        ])
+            ->add('videos', CollectionType::class, [
+            'label' => 'Video(s)',
+            'entry_type' => FileType::class,
+            'entry_options' => array(
+                'constraints'  => array(
+                  new File(['maxSize' => '10M',
+                  "maxSizeMessage" => "Votre document ne doit pas dépasser les 10 Mo.",
+                  "mimeTypes" => ["video/mp4", "video/3gpp"],
+                  "mimeTypesMessage" => "Le document doit avoir une des extensions suivantes : mp4, 3gpp.",
+                        ]),
+                   ),
+                ),
+               'prototype_name' => '__videos__',
+               'prototype'      => true,
+               'allow_add'     => true,
+               'allow_delete'   => true,
+               'required' => true,
+               'label' => 'video',
 
         ]);
     }

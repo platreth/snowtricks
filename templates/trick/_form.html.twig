@@ -4,6 +4,10 @@
 	{{ form_widget(form.name) }}
 	{{ form_errors(form.name) }}
 
+	{{ form_label(form.category) }}
+	{{ form_widget(form.category) }}
+	{{ form_errors(form.category) }}
+
 	{{ form_label(form.images) }}
 	{{ form_errors(form.images) }}
 
@@ -17,9 +21,26 @@
 		{% endfor %}
 	</ul>
 <button type="button"
-        class="add-another-collection-widget"
-        data-list-selector="#images-fields-list">Add another image</button>
+        class="btn add-another-collection-widget btn-primary btn-md"
+        data-list-selector="#images-fields-list">Ajouter une image</button>
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
+	{{ form_label(form.videos) }}
+	{{ form_errors(form.videos) }}
+
+<ul id="videos-fields-list"
+	data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
+	data-widget-tags="{{ '<div></div>'|e }}"
+	data-widget-counter="{{ form.children|length }}">
+	{% for imagesField in form.videos %}
+		{{ form_errors(imagesField) }}
+		{{ form_widget(imagesField) }}
+	{% endfor %}
+</ul>
+
+<button type="button"
+		class="btn add-another-collection-widget-video btn-primary btn-md"
+		data-list-selector="#videos-fields-list">Ajouter une vidéo</button>
+
+    <button class="btn btn-primary btn-md">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
 
