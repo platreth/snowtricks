@@ -17,7 +17,7 @@
 
 .headerIndex {
     width: 100%;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 150px);
     background-image: url(https://ssl.quiksilver.com/static/QS/default/category-assets/marketing-landing/landing/img/snow/tiles/snow_featured_2.jpg);
      background-repeat: no-repeat;
     background-size: cover;

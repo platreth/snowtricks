@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Trick{% endblock %}
+{% block title %}Nouvelle figure{% endblock %}
 
 {% block body %}
-    <h1>Create new Trick</h1>
+    <h1>Créer une nouvelle figure</h1>
 
     {{ include('trick/_form.html.twig') }}
 
@@ -12,8 +12,6 @@
  {% block javascripts %}
 
 	<script type="text/javascript">
-
-
 		// add-collection-widget.js
 	jQuery(document).ready(function () {
 	    jQuery('.add-another-collection-widget').click(function (e) {
@@ -32,7 +30,7 @@
 	        // And store it, the length cannot be used if deleting widgets is allowed
 	        list.data('widget-counter', counter);
 
-	        newWidget = newWidget + '<button id="delete-image" type="button">Delete this tag</button>';
+	        newWidget = newWidget + '<button id="delete-image" type="button" class="btn btn-primary btn-md">Delete this tag</button>';
 	        // create a new list element and add it to the list
 	        var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
 	        newElem.appendTo(list);
@@ -59,7 +57,7 @@
 	        // And store it, the length cannot be used if deleting widgets is allowed
 	        list.data('widget-counter', counter);
 
-	        newWidget = newWidget + '<button id="delete-image" type="button">Delete this tag</button>';
+	        newWidget = newWidget + '<button id="delete-image" type="button" class="btn btn-primary btn-md">Delete this tag</button>';
 	        // create a new list element and add it to the list
 	        var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
 	        newElem.appendTo(list);

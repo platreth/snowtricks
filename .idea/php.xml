@@ -27,7 +27,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
       <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
@@ -50,7 +49,6 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
       <path value="$PROJECT_DIR$/vendor/symfony/inflector" />
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-code" />
-      <path value="$PROJECT_DIR$/vendor/symfony/panther" />
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
@@ -76,7 +74,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
       <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
       <path value="$PROJECT_DIR$/vendor/symfony/form" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation" />
@@ -91,7 +88,6 @@
       <path value="$PROJECT_DIR$/vendor/ocramius/proxy-manager" />
       <path value="$PROJECT_DIR$/vendor/easycorp/easy-log-handler" />
       <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/facebook/webdriver" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
@@ -106,6 +102,8 @@
       <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
       <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
