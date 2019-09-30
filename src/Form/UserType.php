@@ -7,6 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class UserType extends AbstractType {
 
@@ -21,4 +23,15 @@ class UserType extends AbstractType {
                 ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
+
+/**
+ * {@inheritdoc}
+ */
+public function configureOptions(OptionsResolver $resolver)
+{
+    $resolver->setDefaults(array(
+        'csrf_protection'   => false,
+    ));
+}
+
 }

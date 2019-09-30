@@ -19,10 +19,125 @@
                 <th>Date_create</th>
                 <td>{{ trick.dateCreate ? trick.dateCreate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            
+            <tr>
+                <th>Image</th>
+
+                <td>{% for key, image in trick.images %} {{ image.name }} <img src="{{asset('uploads/'~image.path)}}"> {% endfor %}</td>
+            </tr>
+
         </tbody>
     </table>
 
-    <a href="{{ path('trick_index') }}">back to list</a>
+    <!--Main layout-->
+    <main class="mt-5 pt-5" style="padding-left: 0 !important;">
+        <div class="container">
+
+            <!--Section: Post-->
+            <section class="mt-4">
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col">
+
+                        <!--Featured Image-->
+                        <div class="card mb-4 wow fadeIn">
+
+                            <img src="{{asset('uploads/'~trick.images[0].path)}}" class="img-fluid" alt="{{ trick.name }}">
+
+                            <h1 class="h5 my-4">{{trick.name}}</h1>
+
+                        </div>
+                        <!--/.Featured Image-->
+
+{#                        AUTRES IMAGES#}
+
+                        <!--Card-->
+                        <div class="card mb-4 wow fadeIn">
+
+                            <!--Card content-->
+                            <div class="card-body text-center">
+
+
+                                <p class="h6 my-4">Par {{trick.author.email}}, le {{ trick.dateCreate | date('d/m/y') }}</p>
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Card-->
+                        <div class="card mb-4 wow fadeIn">
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+{#                                <p class="h6 my-4">{{trick.description}}</p>#}
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+{#                        <!--Comments-->#}
+{#                        <div class="card card-comments mb-3 wow fadeIn">#}
+
+
+{#                            <div class="card-header font-weight-bold comment-ajax">{{ compteur }} {% if compteur > 1 %} commentaires {% else %} commentaire {% endif %}</div>#}
+
+{#                        </div>#}
+{#                        <!--/.Comments-->#}
+{#                        {% if session.users %}#}
+
+{#                            <!--Reply-->#}
+{#                            <div class="card mb-3 wow fadeIn">#}
+{#                                <div class="card-header font-weight-bold">Laisser un commentaire</div>#}
+{#                                <div class="card-body">#}
+
+{#                                    <!-- Default form reply -->#}
+{#                                    <form  method="POST">#}
+
+{#                                        <!-- Comment -->#}
+{#                                        <div class="form-group">#}
+{#                                            <label for="replyFormComment">Votre commentaire</label>#}
+{#                                            <textarea class="form-control" name='content' id="replyFormComment" rows="5"></textarea>#}
+{#                                        </div>#}
+
+{#                                        <div class="text-center mt-4">#}
+{#                                            <button class="btn btn-info btn-md" id="send_comment" type="button">Envoyer</button>#}
+{#                                        </div>#}
+{#                                    </form>#}
+{#                                    <!-- Default form reply -->#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% else %}#}
+{#                            <div class="card mb-3 wow fadeIn">#}
+{#                                <div class="card-header font-weight-bold">Laisser un commentaire</div>#}
+{#                                <div class="card-body">#}
+
+{#                                    <!-- Comment -->#}
+{#                                    <div class="form-group">#}
+{#                                        <label for="replyFormComment">Vous devez être connecté pour commenter cet article.</label>#}
+{#                                    </div>#}
+
+
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% endif %}#}
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Post-->
+
+        </div>
+    </main>
+
+    <a href="{{ path('app_homepage_index') }}">back to list</a>
 
     <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
 

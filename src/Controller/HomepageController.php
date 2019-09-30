@@ -1,16 +1,21 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Repository\TrickRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomepageController extends Controller {
+class HomepageController extends AbstractController {
 
     /**
-     * @Route("/")
+     * @Route("/", name="app_homepage_index", methods={"GET"})
      */
-    public function index() {
-        return $this->render('homepage/index.html.twig', ['mainNavHome'=>true, 'title'=>'Accueil']);
+    public function index(TrickRepository $trickRepository): Response
+    {
+        return $this->render('trick/index.html.twig', [
+            'tricks' => $trickRepository->findAll(),
+        ]);
     }
 
 }
