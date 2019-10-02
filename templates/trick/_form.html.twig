@@ -16,6 +16,13 @@
 	</div>
 	<div class="row">
 		<div class="col">
+			{{ form_label(form.description) }}
+			{{ form_widget(form.description) }}
+			{{ form_errors(form.name) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
 			{{ form_label(form.images) }}
 			{{ form_errors(form.images) }}
 

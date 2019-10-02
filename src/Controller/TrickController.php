@@ -28,6 +28,7 @@ class TrickController extends AbstractController
 
             $images = [];
             foreach ($trick->getImages() as $image):
+
                 $picture = new Picture();
                 $picture->setName($trick->getName());
                 $fileName = md5(uniqid()) .'.'.$image->guessExtension();
@@ -80,7 +81,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/member/{id}", name="trick_show", methods={"GET"})
+     * @Route("/member/trick/{id}", name="trick_show", methods={"GET"})
      */
     public function show(Trick $trick): Response
     {

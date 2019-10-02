@@ -3,31 +3,30 @@
 {% block title %}Trick{% endblock %}
 
 {% block body %}
-    <h1>Trick</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ trick.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ trick.name }}</td>
-            </tr>
-            <tr>
-                <th>Date_create</th>
-                <td>{{ trick.dateCreate ? trick.dateCreate|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            
-            <tr>
-                <th>Image</th>
+{#    <table class="table">#}
+{#        <tbody>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <td>{{ trick.id }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Name</th>#}
+{#                <td>{{ trick.name }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Date_create</th>#}
+{#                <td>{{ trick.dateCreate ? trick.dateCreate|date('Y-m-d H:i:s') : '' }}</td>#}
+{#            </tr>#}
+{#            #}
+{#            <tr>#}
+{#                <th>Image</th>#}
 
-                <td>{% for key, image in trick.images %} {{ image.name }} <img src="{{asset('uploads/'~image.path)}}"> {% endfor %}</td>
-            </tr>
+{#                <td>{% for key, image in trick.images %} {{ image.name }} <img src="{{asset('uploads/'~image.path)}}"> {% endfor %}</td>#}
+{#            </tr>#}
 
-        </tbody>
-    </table>
+{#        </tbody>#}
+{#    </table>#}
 
     <!--Main layout-->
     <main class="mt-5 pt-5" style="padding-left: 0 !important;">
@@ -43,11 +42,20 @@
                     <div class="col">
 
                         <!--Featured Image-->
-                        <div class="card mb-4 wow fadeIn">
+                        <div class="card mb-4 wow fadeIn text-center">
 
                             <img src="{{asset('uploads/'~trick.images[0].path)}}" class="img-fluid" alt="{{ trick.name }}">
 
                             <h1 class="h5 my-4">{{trick.name}}</h1>
+
+                        </div>
+
+                        <div class="card mb-4 wow fadeIn text-center">
+
+                            {% for image in trick.images %}
+                                <img height="200px" width="200px" src="{{asset('uploads/'~image.path)}}" class="img-fluid" alt="{{ trick.name }}">
+                            {% endfor %}
+
 
                         </div>
                         <!--/.Featured Image-->

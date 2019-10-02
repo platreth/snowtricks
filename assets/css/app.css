@@ -18,10 +18,17 @@
 .headerIndex {
     width: 100%;
     height: calc(100vh - 150px);
-    background-image: url(https://ssl.quiksilver.com/static/QS/default/category-assets/marketing-landing/landing/img/snow/tiles/snow_featured_2.jpg);
-     background-repeat: no-repeat;
+    background-image: url(https://atgbcentral.com/data/out/18/4041330-snowboard-wallpaper.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     overflow: hidden;
     cursor: default;
+}
+
+.headerIndex > h1 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+    color: white;
 }
