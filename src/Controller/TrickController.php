@@ -7,6 +7,7 @@ use App\Entity\Picture;
 use App\Entity\Video;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use App\Services\FileManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,58 +19,28 @@ class TrickController extends AbstractController
     /**
      * @Route("/member/trick/new", name="trick_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileManager $filemanager): Response
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $images = [];
             foreach ($trick->getImages() as $image):
-
-                $picture = new Picture();
-                $picture->setName($trick->getName());
-                $fileName = md5(uniqid()) .'.'.$image->guessExtension();
-                try {
-                  $image->move(
-                      $this->getParameter('image_directory'),
-                      $fileName
-                  );
-                  $picture->setPath($fileName);
-                  $picture->setTrick($trick);
-              } catch (FileException $e) {
-                  // ... handle exception if something happens during file upload
-              }
-              array_push($images, $picture);
+                $picture = $filemanager->upload($image, 'image_trick', 'picture', 'picture');
+                $trick->addFile($picture);
             endforeach;
-              $trick->setImages($images);
-
-            $videos = [];
             foreach ($trick->getVideos() as $vid):
-                $video = new Video();
-                $video->setName($trick->getName());
-                $fileName = md5(uniqid()) .'.'.$vid->guessExtension();
-                try {
-                    $vid->move(
-                        $this->getParameter('image_directory'),
-                        $fileName
-                    );
-                    $video->setPath($fileName);
-                    $video->setTrick($trick);
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                $trick->addVideos($videos);
+                $video = $filemanager->upload($vid, 'image_trick', 'video', 'video');
+                $trick->addFile($video);
             endforeach;
-
 
             $entityManager = $this->getDoctrine()->getManager();
             $trick->setDateCreate(new \DateTime());
             $trick->setAuthor($this->getUser());
             $entityManager->persist($trick);
             $entityManager->flush();
+
 
             return $this->redirectToRoute('app_homepage_index');
         }

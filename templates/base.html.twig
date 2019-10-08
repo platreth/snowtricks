@@ -66,8 +66,8 @@
                         <li class="nav-item avatar dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <img  class="rounded-circle z-depth-0 avatar-header" alt="{{ app.user.picture.title }}" src="{{asset('/uploads/file/')}}{{ app.user.picture.name }}"
-                                     >
+                                {% if app.user.picture is not null %} <img  class="rounded-circle z-depth-0 avatar-header" alt="{{ app.user.picture.title }}" src="{{asset('/uploads/file/')}}{{ app.user.picture.name }}"
+                                     > {% endif %}
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                                  aria-labelledby="navbarDropdownMenuLink-55">

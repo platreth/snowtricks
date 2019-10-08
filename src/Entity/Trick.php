@@ -28,15 +28,6 @@ class Trick
      */
     private $date_create;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", orphanRemoval=true, cascade={"persist"})
-     */
-    private $images;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", orphanRemoval=true, cascade={"persist"})
-     */
-    private $videos;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
@@ -55,11 +46,16 @@ class Trick
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick")
+     */
+    private $file;
+
+
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
-        $this->videos = new ArrayCollection();
+        $this->file = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -87,72 +83,6 @@ class Trick
     public function setDateCreate(\DateTimeInterface $date_create): self
     {
         $this->date_create = $date_create;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Picture[]
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function setImages(array $images) {
-        $this->images = $images;
-    }
-
-    public function addImage(Picture $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Picture $image): self
-    {
-        if ($this->images->contains($image)) {
-            $this->images->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getTrick() === $this) {
-                $image->setTrick(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Video[]
-     */
-    public function getVideos(): Collection
-    {
-        return $this->videos;
-    }
-
-    public function addVideo(Video $video): self
-    {
-        if (!$this->videos->contains($video)) {
-            $this->videos[] = $video;
-            $video->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVideo(Video $video): self
-    {
-        if ($this->videos->contains($video)) {
-            $this->videos->removeElement($video);
-            // set the owning side to null (unless already changed)
-            if ($video->getTrick() === $this) {
-                $video->setTrick(null);
-            }
-        }
 
         return $this;
     }
@@ -192,4 +122,36 @@ class Trick
 
         return $this;
     }
+
+    /**
+     * @return Collection|File[]
+     */
+    public function getFile(): Collection
+    {
+        return $this->file;
+    }
+
+    public function addFile(File $file): self
+    {
+        if (!$this->file->contains($file)) {
+            $this->file[] = $file;
+            $file->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->file->contains($file)) {
+            $this->file->removeElement($file);
+            // set the owning side to null (unless already changed)
+            if ($file->getTrick() === $this) {
+                $file->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
