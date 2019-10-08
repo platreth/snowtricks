@@ -39,7 +39,7 @@ class User implements UserInterface, \Serializable {
      * The below length depends on the "algorithm" you use for encoding
      * the password, but this works well with bcrypt.
      *
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64 ,nullable=true)
      */
     private $password;
 
@@ -57,6 +57,17 @@ class User implements UserInterface, \Serializable {
      * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="author", orphanRemoval=true)
      */
     private $tricks;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $pseudo;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\File", cascade={"persist", "remove"})
+     */
+    private $picture;
+
 
     public function __construct() {
         $this->isActive = true;
@@ -181,6 +192,30 @@ class User implements UserInterface, \Serializable {
                 $trick->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(?string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    public function setPicture($picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
