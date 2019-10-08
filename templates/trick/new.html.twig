@@ -19,14 +19,25 @@
 	        var counter = list.data('widget-counter') | list.children().length;
 
 	        var newWidget = list.attr('data-prototype');
+<<<<<<< HEAD
 
 	        newWidget = newWidget.replace(/__image__/g, counter);
+=======
+	        // replace the "__name__" used in the id and name of the prototype
+	        // with a number that's unique to your emails
+	        // end name attribute looks like name="contact[emails][2]"
+	        newWidget = newWidget.replace(/__images__/g, counter);
+>>>>>>> af6e01d7cb3e0b5459c6081bb6fafe0732727b31
 	        // Increase the counter
 	        counter++;
 	        // And store it, the length cannot be used if deleting widgets is allowed
 	        list.data('widget-counter', counter);
 
+<<<<<<< HEAD
 	        newWidget = newWidget + '<button id="delete-image" type="button" class="btn btn-primary btn-md delete-parent">Delete this tag</button>';
+=======
+	        newWidget = newWidget + '<button id="delete-image" type="button" class="btn btn-primary btn-md">Supprimer cette image</button>';
+>>>>>>> af6e01d7cb3e0b5459c6081bb6fafe0732727b31
 	        // create a new list element and add it to the list
 	        var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
 	        newElem.appendTo(list);
@@ -47,13 +58,17 @@
 	        // replace the "__name__" used in the id and name of the prototype
 	        // with a number that's unique to your emails
 	        // end name attribute looks like name="contact[emails][2]"
-	        newWidget = newWidget.replace(/__video__/g, counter);
+	        newWidget = newWidget.replace(/__videos__/g, counter);
 	        // Increase the counter
 	        counter++;
 	        // And store it, the length cannot be used if deleting widgets is allowed
 	        list.data('widget-counter', counter);
 
+<<<<<<< HEAD
 	        newWidget = newWidget + '<button id="delete-image" type="button" class="btn btn-primary btn-md delete-parent">Delete this tag</button>';
+=======
+	        newWidget = newWidget + '<button id="delete-image" type="button" class="btn btn-primary btn-md">Supprimer cette vidéo</button>';
+>>>>>>> af6e01d7cb3e0b5459c6081bb6fafe0732727b31
 	        // create a new list element and add it to the list
 	        var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
 	        newElem.appendTo(list);

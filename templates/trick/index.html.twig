@@ -4,7 +4,7 @@
 
 {% block bodyContainer %}
     <div class="headerIndex view full-page-intro">
-
+<h1>SNOWTRICKS</h1>
     </div>
     <div class="container mt-2 mb-5 pb-5">
 
@@ -28,13 +28,13 @@
                         <!--Card content-->
                         <div class="card-body">
                             <!--Title-->
-                            <h4 class="card-title">{{ trick.name|e }}</h4>
+                            <a href="{{ path('trick_show', {'id': trick.id}) }}">
+                                <h4 class="card-title">{{ trick.name|e }}</h4>
                             <p class="card-text">
                             </p>
                             <p class="card-text">{{ trick.dateCreate ? trick.dateCreate|date('Y-m-d H:i:s') : '' }}</p>
+                            </a>
                         </div>
-                        <a href="{{ path('trick_show', {'id': trick.id}) }}">Voir</a>
-                        <a href="{{ path('trick_edit', {'id': trick.id}) }}">Editer</a>
                     </div>
                 </a>
                 <!--/.Card-->
@@ -46,7 +46,5 @@
             </tr>
         {% endfor %}
         </div>
-
-    <a href="{{ path('trick_new') }}">Create new</a>
     </div>
 {% endblock %}
