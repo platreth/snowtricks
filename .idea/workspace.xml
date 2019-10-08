@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b92d0c2-b7f8-41c2-aadd-eefe38bacd15" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/snowtricks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/snowtricks.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/TrickType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/TrickType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/trick/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trick/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/trick/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trick/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/trick/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trick/new.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -193,7 +184,7 @@
       <workItem from="1567248908893" duration="599000" />
       <workItem from="1567512549900" duration="2219000" />
       <workItem from="1567599575253" duration="553000" />
-      <workItem from="1567672477032" duration="2177000" />
+      <workItem from="1567672477032" duration="3657000" />
     </task>
     <servers />
   </component>
