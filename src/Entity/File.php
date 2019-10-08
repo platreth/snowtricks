@@ -24,7 +24,7 @@ class File
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $originalName;
+    private $originaleName;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -39,7 +39,12 @@ class File
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateCreated;
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -58,14 +63,14 @@ class File
         return $this;
     }
 
-    public function getOriginalName(): ?string
+    public function getOriginaleName(): ?string
     {
-        return $this->originalName;
+        return $this->originaleName;
     }
 
-    public function setOriginalName(string $originalName): self
+    public function setOriginaleName(string $originaleName): self
     {
-        $this->originalName = $originalName;
+        $this->originaleName = $originaleName;
 
         return $this;
     }
@@ -94,14 +99,26 @@ class File
         return $this;
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->dateCreated;
+        return $this->created_at;
     }
 
-    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
-        $this->dateCreated = $dateCreated;
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
