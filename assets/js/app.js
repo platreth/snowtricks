@@ -11,3 +11,11 @@ require('../css/app.css');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
+
+$( ".button" ).click(function() {
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+});
+
+$( ".button2" ).click(function() {
+    $("html, body").animate({ scrollTop: 0 }, 1000);
+});
