@@ -25,19 +25,28 @@ class TrickController extends AbstractController
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $array_picture = array();
+            $array_video = array();
+
             foreach ($trick->getImages() as $image):
-                $picture = $filemanager->upload($image, 'image_trick', 'picture', 'picture');
-                $trick->addFile($picture);
+                $picture = $filemanager->upload($image, $trick->getName(), 'picture', 'picture', 'setTrickImage', $trick);
+                array_push($array_picture, $picture);
             endforeach;
             foreach ($trick->getVideos() as $vid):
-                $video = $filemanager->upload($vid, 'image_trick', 'video', 'video');
-                $trick->addFile($video);
+                $video = $filemanager->upload($vid, $trick->getName(), 'video', 'video', 'setTrickVideo', $trick);
+                array_push($array_video, $video);
             endforeach;
+
+            $trick->setVideos($array_video);
+            $trick->setImages($array_picture);
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $trick->setDateCreate(new \DateTime());
             $trick->setAuthor($this->getUser());
+
             $entityManager->persist($trick);
             $entityManager->flush();
 

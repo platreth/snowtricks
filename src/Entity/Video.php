@@ -89,4 +89,16 @@ class Video
 
         return $this;
     }
+
+    public function getPlateform(): ?string
+    {
+        return $this->plateform;
+    }
+
+    public function setPlateform(string $plateform): self
+    {
+        $this->plateform = $plateform;
+
+        return $this;
+    }
 }

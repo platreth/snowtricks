@@ -20,7 +20,7 @@
                         <div class="view overlay">
                             <div class="embed-responsive embed-responsive-16by9 rounded-top">
                                 {% for image in trick.images %}
-                                    <img class="embed-responsive-item" src="{{asset('/uploads/')}}{{ image.path|e }}" >
+                                    <img class="embed-responsive-item" src="{{asset('/uploads/picture/')}}{{ image.name|e }}" >
                                 {% endfor %}
                             </div>
                         </div>

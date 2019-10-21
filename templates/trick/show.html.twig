@@ -44,7 +44,7 @@
                         <!--Featured Image-->
                         <div class="card mb-4 wow fadeIn text-center">
 
-                            <img src="{{asset('uploads/'~trick.images[0].path)}}" class="img-fluid" alt="{{ trick.name }}">
+                            <img src="{{asset('uploads/picture/'~trick.images[0].name)}}" class="img-fluid" alt="{{ trick.images[0].title }}">
 
                             <h1 class="h5 my-4">{{trick.name}}</h1>
 
@@ -53,7 +53,7 @@
                         <div class="card mb-4 wow fadeIn text-center">
 
                             {% for image in trick.images %}
-                                <img height="200px" width="200px" src="{{asset('uploads/'~image.path)}}" class="img-fluid" alt="{{ trick.name }}">
+                                <img height="200px" width="200px" src="{{asset('uploads/picture/'~image.name)}}" class="img-fluid" alt="{{ image.title }}">
                             {% endfor %}
 
 

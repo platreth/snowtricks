@@ -37,7 +37,7 @@ class FileManager
      * @return File
      * @throws \Exception
      */
-    public function upload(UploadedFile $file, string $title, string $path, string $type)
+    public function upload(UploadedFile $file, string $title, string $path, string $type, string $setterMethod, $setterObject)
     {
         $newFile = new File();
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -54,6 +54,7 @@ class FileManager
         }
         catch (FileException $e) {
         }
+        $newFile->$setterMethod($setterObject);
         return $newFile;
     }
 

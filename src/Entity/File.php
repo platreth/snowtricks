@@ -49,14 +49,15 @@ class File
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="file")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      */
-    private $trick;
+    private $trick_image;
 
-    public function __construct()
-    {
-        $this->tricks = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="videos")
+     */
+    private $trick_video;
+
 
     public function getId(): ?int
     {
@@ -135,46 +136,28 @@ class File
         return $this;
     }
 
-    /**
-     * @return Collection|Trick[]
-     */
-    public function getTricks(): Collection
+    public function getTrickImage(): ?Trick
     {
-        return $this->tricks;
+        return $this->trick_image;
     }
 
-    public function addTrick(Trick $trick): self
+    public function setTrickImage(?Trick $trick_image): self
     {
-        if (!$this->tricks->contains($trick)) {
-            $this->tricks[] = $trick;
-            $trick->setFile($this);
-        }
+        $this->trick_image = $trick_image;
 
         return $this;
     }
 
-    public function removeTrick(Trick $trick): self
+    public function getTrickVideo(): ?Trick
     {
-        if ($this->tricks->contains($trick)) {
-            $this->tricks->removeElement($trick);
-            // set the owning side to null (unless already changed)
-            if ($trick->getFile() === $this) {
-                $trick->setFile(null);
-            }
-        }
+        return $this->trick_video;
+    }
+
+    public function setTrickVideo(?Trick $trick_video): self
+    {
+        $this->trick_video = $trick_video;
 
         return $this;
     }
 
-    public function getTrick(): ?Trick
-    {
-        return $this->trick;
-    }
-
-    public function setTrick(?Trick $trick): self
-    {
-        $this->trick = $trick;
-
-        return $this;
-    }
 }
