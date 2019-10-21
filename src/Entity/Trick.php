@@ -47,16 +47,11 @@ class Trick
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick")
-     */
-    private $file;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick_image", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick_image", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $images;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick_video", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick_video", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $videos;
 
@@ -64,7 +59,6 @@ class Trick
 
     public function __construct()
     {
-        $this->file = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->videos = new ArrayCollection();
     }
@@ -189,8 +183,8 @@ class Trick
         if ($this->images->contains($image)) {
             $this->images->removeElement($image);
             // set the owning side to null (unless already changed)
-            if ($image->getTrick() === $this) {
-                $image->setTrick(null);
+            if ($image->getTrickImage() === $this) {
+                $image->setTrickImage(null);
             }
         }
 
@@ -226,8 +220,8 @@ class Trick
         if ($this->videos->contains($video)) {
             $this->videos->removeElement($video);
             // set the owning side to null (unless already changed)
-            if ($video->getTrick() === $this) {
-                $video->setTrick(null);
+            if ($video->getTrickVideo() === $this) {
+                $video->setTrickVideo(null);
             }
         }
 

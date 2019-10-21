@@ -93,12 +93,20 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/member/trick/{id}", name="trick_delete", methods={"DELETE"})
+     * @Route("/member/trick/delete/{id}", name="trick_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Trick $trick): Response
+    public function delete(FileManager $fileManager, Request $request, Trick $trick): Response
     {
         if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ($trick->getImages() as $image) {
+                $fileManager->deleteFile($image);
+                $trick->removeImage($image);
+            }
+            foreach ($trick->getVideos() as $video) {
+                $fileManager->deleteFile($video);
+            }
             $entityManager->remove($trick);
             $entityManager->flush();
         }

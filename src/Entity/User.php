@@ -64,7 +64,7 @@ class User implements UserInterface, \Serializable {
     private $pseudo;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\File", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\File", mappedBy="userImage",  cascade={"persist", "remove"})
      */
     private $picture;
 
