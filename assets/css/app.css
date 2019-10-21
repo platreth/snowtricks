@@ -13,6 +13,10 @@
     }
 }
 
+body {
+    padding-bottom: 74px;
+}
+
 
 
 .headerIndex {
@@ -24,6 +28,9 @@
     position: relative;
     overflow: hidden;
     cursor: default;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .headerIndex > h1 {
@@ -31,4 +38,53 @@
     margin-right: auto;
     width: 6em;
     color: white;
+}
+.button:hover {
+    transform: translateY(-20px);
+}
+.button {
+    height: 40px;
+    width: 40px;
+    background-image: url(https://image.flaticon.com/icons/svg/130/130907.svg);
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.button2 {
+    height: 40px;
+    width: 40px;
+    background-image: url(https://image.flaticon.com/icons/svg/130/130907.svg);
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+    transform: rotate(180deg);
+}
+.button2:hover {
+    transform: translateY(-20px) rotate(180deg);
+}
+
+.container-button {
+    position: relative;
+}
+
+.edit {
+    height: 30px;
+    width: 30px;
+    background-image: url(https://image.flaticon.com/icons/svg/181/181540.svg);
+    position: absolute;
+    right: 60px;
+    bottom: 20px;
+}
+
+.delete {
+    height: 30px;
+    width: 30px;
+    background-image: url(https://image.flaticon.com/icons/svg/121/121116.svg);
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
 }
