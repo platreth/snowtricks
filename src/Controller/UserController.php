@@ -41,25 +41,19 @@ class UserController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        if ($user->getPicture() != null) {
-            $fileUpload->deleteFile($user->getPicture());
-            $entityManager->remove($user->getPicture());
-        }
-
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $oldPicture = $entityManager->getRepository(File::class)->findOneBy(array('userImage' => $user->getId()));
-            if ($oldPicture != null) {
-                $fileUpload->deleteFile($oldPicture);
-                $entityManager->remove($oldPicture);
-            }
 
-            $a = $fileUpload->upload($user->getPicture(), 'photo de profil de ' . $user->getPseudo(), 'file', 'image', 'setUserImage', $user);
+            $a = $fileUpload->upload($form->get('picture')->getData(), 'photo de profil de ' . $user->getPseudo(), 'file', 'image', 'setUserImage', $user);
+
+            $user->getPicture();
+            $entityManager->remove( $user->getPicture());
+            $entityManager->flush();
             $user->setPicture($a);
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('user_index');
         }

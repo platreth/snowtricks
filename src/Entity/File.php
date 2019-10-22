@@ -59,11 +59,9 @@ class File
     private $trick_video;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="file", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture")
      */
     private $userImage;
-
-
 
     public function getId(): ?int
     {
