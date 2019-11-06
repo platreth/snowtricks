@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\File;
 use App\Entity\User;
 use App\Form\User1Type;
 use App\Service\FileUploader;
 use App\Services\FileManager;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,14 +38,22 @@ class UserController extends AbstractController
     public function edit(Request $request, FileManager $fileUpload): Response
     {
         $user = $this->getUser();
+
+        $entityManager = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $a = $fileUpload->upload($user->getPicture(), 'photo de profil de ' . $user->getPseudo());
+
+            $a = $fileUpload->upload($form->get('picture')->getData(), 'photo de profil de ' . $user->getPseudo(), 'file', 'image', 'setUserImage', $user);
+
+            $user->getPicture();
+            $entityManager->remove( $user->getPicture());
+            $entityManager->flush();
             $user->setPicture($a);
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('user_index');
         }

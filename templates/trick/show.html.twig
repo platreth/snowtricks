@@ -44,17 +44,26 @@
                         <!--Featured Image-->
                         <div class="card mb-4 wow fadeIn text-center">
 
-                            <img src="{{asset('uploads/'~trick.images[0].path)}}" class="img-fluid" alt="{{ trick.name }}">
+                            <img src="{{asset('uploads/picture/'~trick.images[0].name)}}" class="img-fluid" alt="{{ trick.images[0].title }}">
+                                <h1 class="h5 my-4">{{trick.name}}</h1>
 
-                            <h1 class="h5 my-4">{{trick.name}}</h1>
+                            <div class="row">
+
+                            {% for image in trick.images %}
+                                <img src="{{asset('uploads/picture/'~ image.name)}}" class="img-thumbnail" style="height: 200px" alt="{{ image.title }}">
+
+                            {% endfor %}
+                        </div>
+
 
                         </div>
 
                         <div class="card mb-4 wow fadeIn text-center">
 
-                            {% for image in trick.images %}
-                                <img height="200px" width="200px" src="{{asset('uploads/'~image.path)}}" class="img-fluid" alt="{{ trick.name }}">
-                            {% endfor %}
+
+{#                            {% for image in trick.images %}#}
+{#                                <img height="200px" width="200px" src="{{asset('uploads/'~image.path)}}" class="img-fluid" alt="{{ trick.name }}">#}
+{#                            {% endfor %}#}
 
 
                         </div>
@@ -144,6 +153,7 @@
 
         </div>
     </main>
+
 
     <a href="{{ path('app_homepage_index') }}">back to list</a>
 

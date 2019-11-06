@@ -64,7 +64,7 @@ class User implements UserInterface, \Serializable {
     private $pseudo;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\File", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\File", mappedBy="userImage",  cascade={"persist", "remove"})
      */
     private $picture;
 
@@ -216,6 +216,13 @@ class User implements UserInterface, \Serializable {
     public function setPicture($picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

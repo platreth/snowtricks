@@ -4,9 +4,13 @@
 
 {% block bodyContainer %}
     <div class="headerIndex view full-page-intro">
+
 <h1>SNOWTRICKS</h1>
+        <div class="button"></div>
     </div>
-    <div class="container mt-2 mb-5 pb-5">
+    <div class="container-button">
+
+    <div class="container mt-2 pb-5">
 
         <div class="row mb-4 wow fadeIn">
 
@@ -20,7 +24,7 @@
                         <div class="view overlay">
                             <div class="embed-responsive embed-responsive-16by9 rounded-top">
                                 {% for image in trick.images %}
-                                    <img class="embed-responsive-item" src="{{asset('/uploads/')}}{{ image.path|e }}" >
+                                    <img class="embed-responsive-item" src="{{asset('/uploads/picture/')}}{{ image.name|e }}" >
                                 {% endfor %}
                             </div>
                         </div>
@@ -32,13 +36,46 @@
                                 <h4 class="card-title">{{ trick.name|e }}</h4>
                             <p class="card-text">
                             </p>
-                            <p class="card-text">{{ trick.dateCreate ? trick.dateCreate|date('Y-m-d H:i:s') : '' }}</p>
                             </a>
+                            <p class="card-text">{{ trick.dateCreate ? trick.dateCreate|date('Y-m-d H:i:s') : '' }}</p>
+                            {% if app.user == trick.author %}
+                            <div class="edit"></div>
+                                <div class="delete" data-toggle="modal" data-target="#basicExampleModal_{{ trick.id }}"></div>
+                            {% endif %}
                         </div>
                     </div>
                 </a>
                 <!--/.Card-->
+
+                <!-- Modal -->
+                <div class="modal fade" id="basicExampleModal_{{ trick.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel_{{ trick.id }}"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel_{{ trick.id }}">Supprimer</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sûr de vouloir supprimer cette figure ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+                                <form method="post" action="{{ path('trick_delete', {'id': trick.id}) }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
+                                    <button type="submit" class="btn btn-primary">Supprimer</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!--/ Modal -->
+
 
         {% else %}
             <tr>
@@ -47,4 +84,7 @@
         {% endfor %}
         </div>
     </div>
+        <div class="button2"></div>
+    </div>
+
 {% endblock %}

@@ -47,16 +47,22 @@ class Trick
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick_image", orphanRemoval=true, cascade={"persist", "remove"})
      */
-    private $file;
+    private $images;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="trick_video", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $videos;
 
 
 
     public function __construct()
     {
-        $this->file = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -151,6 +157,80 @@ class Trick
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|File[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(File $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(File $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getTrickImage() === $this) {
+                $image->setTrickImage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function setImages($image): self
+    {
+        $this->images = $image;
+        return $this;
+    }
+
+    /**
+     * @return Collection|File[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(File $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(File $video): self
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getTrickVideo() === $this) {
+                $video->setTrickVideo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function setVideos($video): self
+    {
+        $this->videos = $video;
         return $this;
     }
 
