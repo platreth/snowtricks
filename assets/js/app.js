@@ -19,3 +19,10 @@ $( ".button" ).click(function() {
 $( ".button2" ).click(function() {
     $("html, body").animate({ scrollTop: 0 }, 1000);
 });
+
+$('.loadMoreAjax').click(function () {
+    $.get('/trickAjax/' + $('.card').length , function (data) {
+            console.log(data);
+    })
+
+})
