@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  */
-class Trick
+class Trick implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -67,6 +67,14 @@ class Trick
         $this->images = new ArrayCollection();
         $this->videos = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    }
+
+    public function jsonSerialize() {
+        return array(
+            'id' => $this->id,
+            'picture' => $this->images[0]->path,
+//            'pictureName' => $this->image->name
+            );
     }
 
 
