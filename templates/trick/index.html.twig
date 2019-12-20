@@ -12,7 +12,7 @@
 
     <div class="container mt-2 pb-5">
 
-        <div class="row mb-4 wow fadeIn">
+        <div class="row mb-4 wow fadeIn trick-container">
 
         {% for trick in tricks %}
             <!--Grid column-->
@@ -23,9 +23,9 @@
                         <!--Card image-->
                         <div class="view overlay">
                             <div class="embed-responsive embed-responsive-16by9 rounded-top">
-                                {% for image in trick.images %}
-                                    <img class="embed-responsive-item" src="{{asset('/uploads/picture/')}}{{ image.name|e }}" >
-                                {% endfor %}
+                                {% if trick.images | length > 0 %}
+                                    <img class="embed-responsive-item" src="{{asset('/uploads/picture/')}}{{ trick.images[0].name|e }}" >
+                                {% endif %}
                             </div>
                         </div>
 
@@ -39,12 +39,11 @@
                             </a>
                             <p class="card-text">{{ trick.dateCreate ? trick.dateCreate|date('Y-m-d H:i:s') : '' }}</p>
                             {% if app.user == trick.author %}
-                            <div class="edit"></div>
+                                <a href="{{ path('trick_edit', {'id': trick.id}) }}"><div class="edit"></div></a>
                                 <div class="delete" data-toggle="modal" data-target="#basicExampleModal_{{ trick.id }}"></div>
                             {% endif %}
-                        </div>
+                            </div>
                     </div>
-                </a>
                 <!--/.Card-->
 
                 <!-- Modal -->
@@ -82,9 +81,9 @@
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
-            <button type="button" class="btn btn-primary loadMoreAjax">Voir +</button>
         </div>
     </div>
+        <button type="button" class="btn btn-primary loadMoreAjax">Voir +</button>
         <div class="button2"></div>
     </div>
 

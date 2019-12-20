@@ -66,7 +66,9 @@ class Trick implements \JsonSerializable
     public function jsonSerialize() {
         return array(
             'id' => $this->id,
-            'picture' => $this->images[0]->path,
+            'picture' => $this->images[0]->getName(),
+            'name' => $this->name,
+            'date_create' =>  $this->date_create->format('d-m-Y H:i'),
 //            'pictureName' => $this->image->name
             );
     }

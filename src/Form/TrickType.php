@@ -34,6 +34,7 @@ class TrickType extends AbstractType
         ->add('images', CollectionType::class, [
             'label' => 'Images(s)',
             'entry_type' => FileType::class,
+            'required'   => true,
             'entry_options' => array(
                 'constraints'  => array(
                   new File(['maxSize' => '2M',
