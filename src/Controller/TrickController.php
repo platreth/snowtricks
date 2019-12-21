@@ -97,7 +97,6 @@ class TrickController extends AbstractController
      */
     public function delete(FileManager $fileManager, Request $request, Trick $trick): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
 
             foreach ($trick->getImages() as $image) {
@@ -109,7 +108,6 @@ class TrickController extends AbstractController
             }
             $entityManager->remove($trick);
             $entityManager->flush();
-        }
 
         return $this->redirectToRoute('app_homepage_index');
     }
