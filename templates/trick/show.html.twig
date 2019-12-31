@@ -54,14 +54,21 @@
                             </div>
 
                                 <h1 class="h5 my-4">{{trick.name}}</h1>
-
-                            <div class="row">
-
+                            <div class="container">
+                                <div class="row">
+                                <div class="col">
                             {% for image in trick.images %}
-                                <img src="{{asset('uploads/picture/'~ image.name)}}" class="img-thumbnail" style="height: 200px" alt="{{ image.title }}">
+                                <img src="{{asset('uploads/picture/'~ image.name)}}" class="img-thumbnail" style="height: 100px" alt="{{ image.title }}">
 
                             {% endfor %}
-                        </div>
+                                </div>
+                                    <div class="col">
+                                    {% for video in trick.videos %}
+                                        <img src="{{asset('uploads/picture/'~ video.name)}}" class="img-thumbnail" style="height: 200px" alt="{{ video.title }}">
+
+                                    {% endfor %}
+                                </div>
+                            </div>
 
 
                         </div>
@@ -84,10 +91,7 @@
 
                             <!--Card content-->
                             <div class="card-body text-center">
-
-
-                                <p class="h6 my-4">Par {{trick.author.email}}, le {{ trick.dateCreate | date('d/m/y') }}</p>
-
+                                    <p>{{trick.description}}</p>
                             </div>
 
                         </div>
@@ -99,57 +103,55 @@
                             <!--Card content-->
                             <div class="card-body">
 
-{#                                <p class="h6 my-4">{{trick.description}}</p>#}
+                                <p class="h6 my-4">{{trick.category.name}}</p>
+                                <p class="h6 my-4">Par {{trick.author.email}}, le {{ trick.dateCreate | date('d/m/y') }}</p>
                             </div>
 
                         </div>
                         <!--/.Card-->
 
-{#                        <!--Comments-->#}
-{#                        <div class="card card-comments mb-3 wow fadeIn">#}
+                        <!--Comments-->
+                        <div class="card card-comments mb-3 wow fadeIn">
+
+                        </div>
+                        <!--/.Comments-->
+                        {% if app.user %}
+
+                            <!--Reply-->
+                            <div class="card mb-3 wow fadeIn">
+                                <div class="card-header font-weight-bold">Laisser un commentaire</div>
+                                <div class="card-body">
+
+                                    <!-- Default form reply -->
+                                    <form  method="POST">
+
+                                        <!-- Comment -->
+                                        <div class="form-group">
+                                            <label for="replyFormComment">Votre commentaire</label>
+                                            <textarea class="form-control" name='content' id="replyFormComment" rows="5"></textarea>
+                                        </div>
+
+                                        <div class="text-center mt-4">
+                                            <button class="btn btn-info btn-md" id="send_comment" type="button">Envoyer</button>
+                                        </div>
+                                    </form>
+                                    <!-- Default form reply -->
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="card mb-3 wow fadeIn">
+                                <div class="card-header font-weight-bold">Laisser un commentaire</div>
+                                <div class="card-body">
+
+                                    <!-- Comment -->
+                                    <div class="form-group">
+                                        <label for="replyFormComment">Vous devez être connecté pour commenter cet article.</label>
+                                    </div>
 
 
-{#                            <div class="card-header font-weight-bold comment-ajax">{{ compteur }} {% if compteur > 1 %} commentaires {% else %} commentaire {% endif %}</div>#}
-
-{#                        </div>#}
-{#                        <!--/.Comments-->#}
-{#                        {% if session.users %}#}
-
-{#                            <!--Reply-->#}
-{#                            <div class="card mb-3 wow fadeIn">#}
-{#                                <div class="card-header font-weight-bold">Laisser un commentaire</div>#}
-{#                                <div class="card-body">#}
-
-{#                                    <!-- Default form reply -->#}
-{#                                    <form  method="POST">#}
-
-{#                                        <!-- Comment -->#}
-{#                                        <div class="form-group">#}
-{#                                            <label for="replyFormComment">Votre commentaire</label>#}
-{#                                            <textarea class="form-control" name='content' id="replyFormComment" rows="5"></textarea>#}
-{#                                        </div>#}
-
-{#                                        <div class="text-center mt-4">#}
-{#                                            <button class="btn btn-info btn-md" id="send_comment" type="button">Envoyer</button>#}
-{#                                        </div>#}
-{#                                    </form>#}
-{#                                    <!-- Default form reply -->#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        {% else %}#}
-{#                            <div class="card mb-3 wow fadeIn">#}
-{#                                <div class="card-header font-weight-bold">Laisser un commentaire</div>#}
-{#                                <div class="card-body">#}
-
-{#                                    <!-- Comment -->#}
-{#                                    <div class="form-group">#}
-{#                                        <label for="replyFormComment">Vous devez être connecté pour commenter cet article.</label>#}
-{#                                    </div>#}
-
-
-{#                                </div>#}
-{#                            </div>#}
-{#                        {% endif %}#}
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                     <!--Grid column-->
 
