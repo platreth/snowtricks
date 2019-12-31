@@ -42,9 +42,17 @@
                     <div class="col">
 
                         <!--Featured Image-->
-                        <div class="card mb-4 wow fadeIn text-center">
+                        <div class="card mb-4 wow fadeIn text-center position-relative">
 
-                            <img src="{{asset('uploads/picture/'~trick.images[0].name)}}" class="img-fluid" alt="{{ trick.images[0].title }}">
+                            <img src="{{asset('uploads/picture/'~trick.cover)}}" class="img-fluid" alt="{{ trick.name }}">
+
+                            <div class="position-absolute">
+                                {% if app.user == trick.author %}
+                                    <a href="{{ path('trick_edit', {'id': trick.id}) }}"><div class="edit"></div></a>
+                                    <div class="delete" data-toggle="modal" data-target="#basicExampleModal_{{ trick.id }}"></div>
+                                {% endif %}
+                            </div>
+
                                 <h1 class="h5 my-4">{{trick.name}}</h1>
 
                             <div class="row">

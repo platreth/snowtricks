@@ -23,9 +23,7 @@
                         <!--Card image-->
                         <div class="view overlay">
                             <div class="embed-responsive embed-responsive-16by9 rounded-top">
-                                {% if trick.images | length > 0 %}
-                                    <img class="embed-responsive-item" src="{{asset('/uploads/picture/')}}{{ trick.images[0].name|e }}" >
-                                {% endif %}
+                                    <img class="embed-responsive-item" src="{{asset('/uploads/picture/')}}{{ trick.cover|e }}" >
                             </div>
                         </div>
 

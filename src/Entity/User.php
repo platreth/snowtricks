@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Table(name="user")
  * @UniqueEntity(fields="email")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable {
 
@@ -72,6 +72,11 @@ class User implements UserInterface, \Serializable {
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $token;
 
 
     public function __construct() {
@@ -262,6 +267,22 @@ class User implements UserInterface, \Serializable {
         }
 
         return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function reloadToken() {
+        $this->setToken(bin2hex(random_bytes(16)));
     }
 
 }
