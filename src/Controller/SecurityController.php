@@ -118,6 +118,7 @@ class SecurityController extends AbstractController
             if ($user->getToken() == $token) {
                 $password = $encoder->encodePassword($user, $user->getPassword());
                 $user->setPassword($password);
+                $user->setToken(null);
                 $em->persist($user);
                 $em->flush();
 
