@@ -88,3 +88,13 @@ body {
     right: 20px;
     bottom: 20px;
 }
+
+.position-absolute {
+    top: 60px;
+    right: 0px;
+}
+
+.img-fluid {
+position: relative;
+}
+
