@@ -65,6 +65,11 @@ class Trick implements \JsonSerializable
      */
     private $cover;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $slug;
+
 
 
     public function __construct()
@@ -294,6 +299,18 @@ class Trick implements \JsonSerializable
     public function setCover($cover): self
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

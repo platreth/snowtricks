@@ -8,6 +8,7 @@ use App\Entity\Video;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use App\Services\FileManager;
+use App\Services\SlugifyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/member/trick/new", name="trick_new", methods={"GET","POST"})
      */
-    public function new(Request $request, FileManager $filemanager): Response
+    public function new(Request $request, FileManager $filemanager, SlugifyService $slugify): Response
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
@@ -48,6 +49,10 @@ class TrickController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $trick->setDateCreate(new \DateTime());
             $trick->setAuthor($this->getUser());
+
+            $trick->setSlug($slugify->generateSlugify($trick->getName(), Trick::class));
+
+
 
             $entityManager->persist($trick);
             $entityManager->flush();
