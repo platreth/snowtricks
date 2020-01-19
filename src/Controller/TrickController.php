@@ -30,6 +30,8 @@ class TrickController extends AbstractController
             $array_picture = array();
             $array_video = array();
 
+            $trick->setCover($filemanager->simpleUpload($trick->getCover(), 'picture'));
+
             foreach ($trick->getImages() as $image):
                 $picture = $filemanager->upload($image, $trick->getName(), 'picture', 'picture', 'setTrickImage', $trick);
                 array_push($array_picture, $picture);
@@ -49,6 +51,11 @@ class TrickController extends AbstractController
 
             $entityManager->persist($trick);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Le trick <strong>' . $trick->getName() . '</strong> a bien été enregistré !'
+            );
 
 
             return $this->redirectToRoute('app_homepage_index');

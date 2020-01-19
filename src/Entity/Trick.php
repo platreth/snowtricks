@@ -60,6 +60,11 @@ class Trick implements \JsonSerializable
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cover;
+
 
 
     public function __construct()
@@ -72,7 +77,7 @@ class Trick implements \JsonSerializable
     public function jsonSerialize() {
         return array(
             'id' => $this->id,
-            'picture' => $this->images[0]->getName(),
+            'picture' => $this->getCover(),
             'name' => $this->name,
             'date_create' =>  $this->date_create->format('d-m-Y H:i'),
 //            'pictureName' => $this->image->name
@@ -188,7 +193,7 @@ class Trick implements \JsonSerializable
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
-            $image->setTrick($this);
+//            $image->setTrick($this);
         }
 
         return $this;
@@ -277,6 +282,18 @@ class Trick implements \JsonSerializable
                 $comment->setTrick(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    public function setCover($cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }

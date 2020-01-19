@@ -25,8 +25,13 @@ class SecurityTest extends WebTestCase
     	$this->assertGreaterThan(0,$crawler->filter('a:contains("Connexion")')->count());
     	$this->assertGreaterThan(0,$crawler->filter('a:contains("Inscription")')->count());
     }
-//    public function testConnexion()
-//    {
+
+    public function testRegister() {
+
+    }
+
+    public function testConnexion()
+    {
 //    	$client = self::createClient();
 //    	$crawler = $client->request('GET', '/');
 //    	$link = $crawler
@@ -51,8 +56,8 @@ class SecurityTest extends WebTestCase
 //		// die();
 //
 //		$this->assertGreaterThan(0,$crawler->filter('a:contains("Espace membre")')->count());
-//
-//
-//
-//    }
+
+
+
+    }
 }
