@@ -85,6 +85,7 @@ class Trick implements \JsonSerializable
             'picture' => $this->getCover(),
             'name' => $this->name,
             'date_create' =>  $this->date_create->format('d-m-Y H:i'),
+            'slug' => $this->getSlug(),
 //            'pictureName' => $this->image->name
             );
     }

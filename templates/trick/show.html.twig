@@ -48,7 +48,7 @@
 
                             <div class="position-absolute">
                                 {% if app.user == trick.author %}
-                                    <a href="{{ path('trick_edit', {'id': trick.id}) }}"><div class="edit"></div></a>
+                                    <a href="{{ path('trick_edit', {'slug': trick.slug}) }}"><div class="edit"></div></a>
                                     <div class="delete" data-toggle="modal" data-target="#basicExampleModal_{{ trick.id }}"></div>
                                 {% endif %}
                             </div>
@@ -64,7 +64,7 @@
                                 </div>
                                     <div class="col">
                                     {% for video in trick.videos %}
-                                        <img src="{{asset('uploads/picture/'~ video.name)}}" class="img-thumbnail" style="height: 200px" alt="{{ video.title }}">
+                                        <video controls src="{{asset('uploads/video/'~ video.name)}}" class="img-thumbnail" style="height: 200px" alt="{{ video.title }}">
 
                                     {% endfor %}
                                 </div>
@@ -161,7 +161,7 @@
 
     <a href="{{ path('app_homepage_index') }}">back to list</a>
 
-    <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
+    <a href="{{ path('trick_edit', {'slug': trick.slug}) }}">edit</a>
 
     {{ include('trick/_delete_form.html.twig') }}
 {% endblock %}

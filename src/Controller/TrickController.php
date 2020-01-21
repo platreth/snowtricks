@@ -59,7 +59,7 @@ class TrickController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Le trick <strong>' . $trick->getName() . '</strong> a bien été enregistré !'
+                'Le trick ' . $trick->getName() . ' a bien été enregistré !'
             );
 
 
@@ -73,7 +73,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/member/trick/{id}", name="trick_show", methods={"GET"})
+     * @Route("/member/trick/{slug}", name="trick_show", methods={"GET"})
      */
     public function show(Trick $trick): Response
     {
@@ -83,7 +83,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/member/trick/{id}/edit", name="trick_edit", methods={"GET","POST"})
+     * @Route("/member/trick/{slug}/edit", name="trick_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Trick $trick): Response
     {
