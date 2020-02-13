@@ -33,6 +33,19 @@ class TrickRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+     /**
+      * @return Trick[] Returns an array of Trick objects
+      */
+    public function findBySlug($slug)
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.id', 'DESC')
+            ->andWhere('t.slug = :val')
+            ->setParameter('val', $slug)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 
     /*

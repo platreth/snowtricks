@@ -9,14 +9,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CommentType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('content')
-            ->add('user')
-            ->add('trick')
-        ;
-    }
+public function buildForm(FormBuilderInterface $builder, array $options)
+{
+    $builder
+        ->add('content', TextareaType::class, $this->getOptions('Votre commentaire', 'Contenu de votre commentaire ...'))
+    ;
+}
 
     public function configureOptions(OptionsResolver $resolver)
     {

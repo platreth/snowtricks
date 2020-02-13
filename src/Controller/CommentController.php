@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,26 +27,39 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="comment_new", methods={"GET","POST"})
+     * @Route("/comment/new/{slug}", name="comment_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param TrickRepository $trickRepository
+     * @param $slug
+     * @return Response
+     * @throws \Exception
      */
-    public function new(Request $request): Response
+    public function new(Request $request, TrickRepository $trickRepository, $slug): Response
     {
+        $trick = $trickRepository->findBySlug($slug);
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setCreatedAt(new \DateTime());
+            $comment->setTrick($trick);
+            $comment->setUser($this->getUser());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('comment_index');
-        }
+            $this->addFlash(
+                'success',
+                'Votre commentaire a bien été enregistré !'
+            );
 
-        return $this->render('comment/new.html.twig', [
-            'comment' => $comment,
-            'form' => $form->createView(),
-        ]);
+            return $this->redirectToRoute('trick_show', [
+                'slug' => $trick->getSlug()
+            ]);
+        }
     }
 
     /**
