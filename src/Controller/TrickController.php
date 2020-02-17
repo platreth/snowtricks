@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Trick;
 use App\Entity\Picture;
 use App\Entity\Video;
+use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use App\Services\FileManager;
 use App\Services\SlugifyService;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,11 +77,30 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/member/trick/{slug}", name="trick_show", methods={"GET"})
+     * @param Trick $trick
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @return Response
      */
-    public function show(Trick $trick): Response
+    public function show(Trick $trick, Request $request, ObjectManager $manager): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setTrick($trick);
+            $comment->setUser($this->getUser());
+
+            dd($form);
+
+            $manager->persist($comment);
+            $manager->flush();
+        }
+        return $this->redirectToRoute('trick_show');
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
+            'form' => $form->createView(),
         ]);
     }
 
