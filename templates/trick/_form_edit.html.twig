@@ -1,0 +1,43 @@
+{{ form_start(form) }}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div class="col">
+            {{ form_label(form.category) }}
+            {{ form_widget(form.category) }}
+            {{ form_errors(form.category) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+            {{ form_errors(form.description) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary btn-md">{{ button_label|default('Enregistrer') }}</button>
+
+        </div></div>
+
+</div>
+{{ form_end(form) }}
+
+
+<style>
+    #trick_category {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    .form-group {
+        display: none;
+    }
+</style>
+

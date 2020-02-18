@@ -48,8 +48,7 @@
 
                             <div class="position-absolute">
                                 {% if app.user == trick.author %}
-                                    <a href="{{ path('trick_edit', {'slug': trick.slug}) }}"><div class="edit"></div></a>
-                                    <div class="delete" data-toggle="modal" data-target="#basicExampleModal_{{ trick.id }}"></div>
+                                    <a href="{{ path('trick_edit_cover', {'slug': trick.slug}) }}"><div class="edit"></div></a>
                                 {% endif %}
                             </div>
 
@@ -99,15 +98,20 @@
 
                                 <p class="h6 my-4">{{trick.category.name}}</p>
                                 <p class="h6 my-4">Par {{trick.author.email}}, le {{ trick.dateCreate | date('d/m/y') }}</p>
+                                {% if app.user == trick.author %}
+                                    <a class ="btn btn-sm btn-primary" href="{{ path('trick_edit', {'slug': trick.slug}) }}">modifier</a>
+                                {% endif %}
                             </div>
 
                         </div>
                         <!--/.Card-->
 
                         <!--Comments-->
-                        <div class="card card-comments mb-3 wow fadeIn">
+                            <div class="card card-comments mb-3 wow fadeIn">
 
-                        </div>
+                                <div class="card-header font-weight-bold comment-ajax">{{ compteur }} {% if compteur > 1 %} commentaires {% else %} commentaire {% endif %}</div>
+                            </div>
+
                         <!--/.Comments-->
                             {% if app.user %}
                                 {{ form_start(form) }}
@@ -136,3 +140,15 @@
 
     {{ include('trick/_delete_form.html.twig') }}
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+    let urlAjaxCommentPost = "{{ path('trick_comment_ajax', {'slug': trick.slug}) }}"
+    let trickid = '{{trick.id}}';
+    let compteur = {{compteur}};
+
+    </script>
+    {{ encore_entry_script_tags('post') }}
+
+{% endblock %}
+

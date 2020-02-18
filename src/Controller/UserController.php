@@ -49,7 +49,9 @@ class UserController extends AbstractController
             $a = $fileUpload->upload($form->get('picture')->getData(), 'photo de profil de ' . $user->getPseudo(), 'file', 'image', 'setUserImage', $user);
 
             $user->getPicture();
-            $entityManager->remove( $user->getPicture());
+            if ($user->getPicture()) {
+                $entityManager->remove( $user->getPicture());
+            }
             $entityManager->flush();
             $user->setPicture($a);
             $entityManager->persist($user);
