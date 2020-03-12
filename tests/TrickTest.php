@@ -51,7 +51,4 @@ class TrickTest extends WebTestCase
 
     }
 
-    public function testdeleteTrick() {
-
-    }
 }

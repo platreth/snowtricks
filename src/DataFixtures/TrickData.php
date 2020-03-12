@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
+use App\Entity\Trick;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -9,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserData extends Fixture implements ContainerAwareInterface
+class TrickData extends Fixture implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -35,20 +37,21 @@ class UserData extends Fixture implements ContainerAwareInterface
 
     /**
      * @param ObjectManager $manager
+     * @throws \Exception
      */
     public function load(ObjectManager $manager)
     {
-        $user1 = new User;
-        $user1->setEmail("hugo.platret@gmail.com");
-        $user1->setIsActive(1);
-        $password = $this->encoder->encodePassword($user1, 'coucou');
-        $user1->setPassword($password);
-        $user1->setPseudo('hplatret');
-
-
-        $manager->persist($user1);
-
+        for ($i = 1; $i <= 10; $i++) {
+            $trick = new Trick();
+            $user = $manager->getRepository(User::class)->findOneBy(array('email' => "hugo.platret@gmail.com"));
+            $category = $manager->getRepository(Category::class)->findOneBy(array("name" => "grabs"));
+            $trick->setCategory($category);
+            $trick->setSlug('test' . $i);
+            $trick->setName('Trick de test' . $i);
+            $trick->setDateCreate(new \DateTime('now'));
+            $trick->setDescription('Ceci est une description' . $i);
+            $manager->persist($trick);
+        }
         $manager->flush();
-
     }
 }
