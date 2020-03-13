@@ -38,17 +38,17 @@ class UserData extends Fixture implements ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
-        $user1 = new User;
-        $user1->setEmail("hugo.platret@gmail.com");
-        $user1->setIsActive(1);
-        $password = $this->encoder->encodePassword($user1, 'coucou');
-        $user1->setPassword($password);
-        $user1->setPseudo('hplatret');
-
-
-        $manager->persist($user1);
-
-        $manager->flush();
+//        $user1 = new User;
+//        $user1->setEmail("hugo.platret@gmail.com");
+//        $user1->setIsActive(1);
+//        $password = $this->encoder->encodePassword($user1, 'coucou');
+//        $user1->setPassword($password);
+//        $user1->setPseudo('hplatret');
+//
+//
+//        $manager->persist($user1);
+//
+//        $manager->flush();
 
     }
 }

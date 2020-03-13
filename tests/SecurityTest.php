@@ -11,7 +11,7 @@ class SecurityTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/');
+        $client->request('GET', '/register');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
@@ -19,7 +19,7 @@ class SecurityTest extends WebTestCase
     public function testIndex()
     {
     	$client = self::createClient();
-    	$crawler = $client->request('GET', '/');		
+    	$crawler = $client->request('GET', '/register');
 
     	$this->assertGreaterThan(0,$crawler->filter('a:contains("Accueil")')->count());
     	$this->assertGreaterThan(0,$crawler->filter('a:contains("Connexion")')->count());
@@ -28,16 +28,10 @@ class SecurityTest extends WebTestCase
 
     public function testConnexion()
     {
-    	$client = self::createClient();
-    	$crawler = $client->request('GET', '/');
-    	$link = $crawler
-    		->filter('a:contains("Connexion")') // find all links with the text "Greet"
-    		->eq(0) // select the second link in the list
-    		->link();
+    	$client = static::createClient();
+    	$crawler = $client->request('GET', '/login');
 
-    	$crawler = $client->click($link);
-
-    	$form = $crawler->selectButton('ok')->form();
+    	$form = $crawler->selectButton('Ok')->form();
 
 		// set some values
 		$form['_username'] = 'hugo.platret@gmail.com';
@@ -48,9 +42,10 @@ class SecurityTest extends WebTestCase
 
 		$this->assertTrue($client->getResponse()->isRedirect());
 		$crawler = $client->followRedirect();
-		// var_dump($client->getResponse()->getContent());
-		// die();
+//		 var_dump($client->getResponse()->getContent());
+//		 die();
 
-		$this->assertGreaterThan(0,$crawler->filter('a:contains("Espace membre")')->count());
-    }
+        $this->assertEquals(0,
+            $crawler->filter('li:contains("This value is not valid.")')->count()
+        );    }
 }

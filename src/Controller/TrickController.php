@@ -111,7 +111,7 @@ class TrickController extends AbstractController
             ));
         }
         return $this->render('trick/show.html.twig', [
-            'compteur' => $commentRepository->count(array()),
+            'compteur' => $commentRepository->count(array('trick' => $trick->getId())),
             'trick' => $trick,
             'form' => $form->createView(),
         ]);

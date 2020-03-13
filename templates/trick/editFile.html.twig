@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Trick{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {{ form_label(form.file) }}
+                {{ form_widget(form.file) }}
+                {{ form_errors(form.file) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary btn-md">{{ button_label|default('Enregistrer') }}</button>
+
+            </div></div>
+
+    </div>
+    {{ form_end(form) }}
+
+
+    <style>
+        #trick_category {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        .form-group {
+            display: none;
+        }
+    </style>
+
+{% endblock %}
+

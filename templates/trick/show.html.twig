@@ -58,15 +58,19 @@
                                 <div class="col">
                             {% for image in trick.images %}
                                 <img src="{{asset('uploads/picture/'~ image.name)}}" class="img-thumbnail" style="height: 100px" alt="{{ image.title }}">
-
+                                <a  class ="btn btn-sm btn-primary" href="{{ path('file_delete', {'id': image.id}) }}">Supprimer l'image</a>
                             {% endfor %}
+                                    <a class ="btn btn-sm btn-primary" href="{{ path('add_image', {'id': trick.id}) }}">Ajouter une image</a>
+
                                 </div>
                                     <div class="col">
                                     {% for video in trick.videos %}
-                                        <video controls src="{{asset('uploads/video/'~ video.name)}}" class="img-thumbnail" style="height: 200px" alt="{{ video.title }}">
-
+                                        <video controls src="{{asset('uploads/video/'~ video.name)}}" class="img-thumbnail" style="height: 200px" alt="{{ video.title }}"></video>
+                                            <a  class ="btn btn-sm btn-danger" href="{{ path('file_delete', {'id': video.id}) }}">Supprimer la vidéo</a>
                                     {% endfor %}
-                                </div>
+                                        <a class ="btn btn-sm btn-primary" href="{{ path('add_video', {'id': trick.id}) }}">Ajouter une vidéo</a>
+
+                                    </div>
                             </div>
 
 

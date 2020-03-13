@@ -56,7 +56,7 @@ class Trick implements \JsonSerializable
     private $videos;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $comments;
 
@@ -152,37 +152,6 @@ class Trick implements \JsonSerializable
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|File[]
-     */
-    public function getFile(): Collection
-    {
-        return $this->file;
-    }
-
-    public function addFile(File $file): self
-    {
-        if (!$this->file->contains($file)) {
-            $this->file[] = $file;
-            $file->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFile(File $file): self
-    {
-        if ($this->file->contains($file)) {
-            $this->file->removeElement($file);
-            // set the owning side to null (unless already changed)
-            if ($file->getTrick() === $this) {
-                $file->setTrick(null);
-            }
-        }
 
         return $this;
     }
