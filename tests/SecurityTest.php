@@ -11,7 +11,7 @@ class SecurityTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/register');
+        $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
@@ -19,7 +19,7 @@ class SecurityTest extends WebTestCase
     public function testIndex()
     {
     	$client = self::createClient();
-    	$crawler = $client->request('GET', '/register');
+    	$crawler = $client->request('GET', '/');
 
     	$this->assertGreaterThan(0,$crawler->filter('a:contains("Accueil")')->count());
     	$this->assertGreaterThan(0,$crawler->filter('a:contains("Connexion")')->count());
@@ -42,8 +42,6 @@ class SecurityTest extends WebTestCase
 
 		$this->assertTrue($client->getResponse()->isRedirect());
 		$crawler = $client->followRedirect();
-//		 var_dump($client->getResponse()->getContent());
-//		 die();
 
         $this->assertEquals(0,
             $crawler->filter('li:contains("This value is not valid.")')->count()

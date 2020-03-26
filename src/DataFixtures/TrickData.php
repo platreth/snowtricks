@@ -53,6 +53,10 @@ class TrickData extends Fixture implements ContainerAwareInterface
         $manager->persist($user1);
 
         $manager->flush();
+
+        if (file_exists("src/DataFixtures/images/image.jpg")) {
+        rename("src/DataFixtures/images/image.jpg", "public/uploads/picture/image.jpg");
+    }
         for ($i = 1; $i <= 10; $i++) {
             $trick = new Trick();
             $user = $manager->getRepository(User::class)->findOneBy(array('email' => "hugo.platret@gmail.com"));
@@ -62,9 +66,9 @@ class TrickData extends Fixture implements ContainerAwareInterface
             $trick->setSlug('test' . $i);
             $trick->setName('Trick de test' . $i);
             $trick->setDateCreate(new \DateTime('now'));
-            $trick->setCover("snowboard-5e45b3ed53f81.jpeg");
+            $trick->setCover("image.jpg");
+            // Move image
             $trick->setDescription('Ceci est une description' . $i);
-
             $comment = new Comment();
             $comment->setCreatedAt(new \DateTime('now'));
             $comment->setUser($user);

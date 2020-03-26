@@ -10,7 +10,7 @@ function getComment(startComment) {
                 var comment = data[i];
                 var html = " <div class=\"card-body 0to5\">" +
                     " <div class=\"media d-block d-md-flex mt-3\">" +
-                    '<img class="d-flex mb-3 mx-auto" src="../../' + comment.picture + '" alt="' + comment.pseudo + '">' +
+                    '<img class="d-flex mb-3 mx-auto img-thumbnail" style="height: 100px;" src="/uploads/file/' + comment.picture + '" alt="' + comment.pseudo + '">' +
                     "<div class=\"media-body text-center text-md-left ml-md-3 ml-0\">" +
                     "<h5 class=\"mt-0 font-weight-bold\"> " + comment.pseudo + "" +
                     "</h5>" +

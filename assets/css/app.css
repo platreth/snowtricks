@@ -98,3 +98,7 @@ body {
 position: relative;
 }
 
+.comment_content {
+    display: none;
+}
+

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
-class TrickTest extends WebTestCase
+class TrickT extends WebTestCase
 {
 
 //    public function testCreate() {

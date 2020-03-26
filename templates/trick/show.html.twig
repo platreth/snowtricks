@@ -29,7 +29,7 @@
 {#    </table>#}
 
     <!--Main layout-->
-    <main class="mt-5 pt-5" style="padding-left: 0 !important;">
+    <main class="mt-5 pt-5" style="padding-left: 0 !important;" xmlns="http://www.w3.org/1999/html">
         <div class="container">
 
             <!--Section: Post-->
@@ -42,30 +42,33 @@
                     <div class="col">
 
                         <!--Featured Image-->
-                        <div class="card mb-4 wow fadeIn text-center position-relative">
-
-                            <img src="{{asset('uploads/picture/'~trick.cover)}}" class="img-fluid" alt="{{ trick.name }}">
-
+                        <div class="wow fadeIn text-center col-md-12 mb-3">
+                        <img src="{{asset('uploads/picture/'~trick.cover)}}" class="img-fluid z-depth-1" alt="Responsive image">
                             <div class="position-absolute">
                                 {% if app.user == trick.author %}
                                     <a href="{{ path('trick_edit_cover', {'slug': trick.slug}) }}"><div class="edit"></div></a>
                                 {% endif %}
                             </div>
+                        </div>
+                        <div class="card mb-4 wow fadeIn text-center position-relative">
+
 
                                 <h1 class="h5 my-4">{{trick.name}}</h1>
                             <div class="container">
                                 <div class="row">
                                 <div class="col">
                             {% for image in trick.images %}
-                                <img src="{{asset('uploads/picture/'~ image.name)}}" class="img-thumbnail" style="height: 100px" alt="{{ image.title }}">
-                                <a  class ="btn btn-sm btn-primary" href="{{ path('file_delete', {'id': image.id}) }}">Supprimer l'image</a>
-                            {% endfor %}
-                                    <a class ="btn btn-sm btn-primary" href="{{ path('add_image', {'id': trick.id}) }}">Ajouter une image</a>
 
-                                </div>
+                                    <img src="{{asset('uploads/picture/'~ image.name)}}" class="img-thumbnail" style="height: 100px; width: 200px;" alt="{{ image.title }}">
+                                     <a  class ="btn btn-sm btn-primary" href="{{ path('file_delete', {'id': image.id}) }}">Supprimer</a>
+
+                            {% endfor %}
+                                <br>
+                                    <a class ="btn btn-sm btn-primary" href="{{ path('add_image', {'id': trick.id}) }}">Ajouter une image</a>
+                                    </div>
                                     <div class="col">
                                     {% for video in trick.videos %}
-                                        <video controls src="{{asset('uploads/video/'~ video.name)}}" class="img-thumbnail" style="height: 200px" alt="{{ video.title }}"></video>
+                                        <video controls src="{{asset('uploads/video/'~ video.name)}}" class="img-thumbnail" style="height: 200px; width: 200px;" alt="{{ video.title }}"></video>
                                             <a  class ="btn btn-sm btn-danger" href="{{ path('file_delete', {'id': video.id}) }}">Supprimer la vidéo</a>
                                     {% endfor %}
                                         <a class ="btn btn-sm btn-primary" href="{{ path('add_video', {'id': trick.id}) }}">Ajouter une vidéo</a>
@@ -79,16 +82,8 @@
                         <div class="card mb-4 wow fadeIn text-center">
 
 
-{#                            {% for image in trick.images %}#}
-{#                                <img height="200px" width="200px" src="{{asset('uploads/'~image.path)}}" class="img-fluid" alt="{{ trick.name }}">#}
-{#                            {% endfor %}#}
-
-
                         </div>
                         <!--/.Featured Image-->
-
-{#                        AUTRES IMAGES#}
-
                         <!--Card-->
                         <div class="card mb-4 wow fadeIn">
 
@@ -136,11 +131,6 @@
 
         </div>
     </main>
-
-
-    <a href="{{ path('app_homepage_index') }}">back to list</a>
-
-    <a href="{{ path('trick_edit', {'slug': trick.slug}) }}">edit</a>
 
     {{ include('trick/_delete_form.html.twig') }}
 {% endblock %}
