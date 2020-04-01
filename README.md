@@ -1,4 +1,5 @@
-# SnowTricks [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1ee7d64c3b314ab8a1e8bcf415bf2610)](https://www.codacy.com/app/platreth/snwotricks?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Silverfabien/SnowTricks&amp;utm_campaign=Badge_Grade)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab4d3ec79cde4817b693dd54d7770969)](https://app.codacy.com/manual/platreth/snowtricks?utm_source=github.com&utm_medium=referral&utm_content=platreth/snowtricks&utm_campaign=Badge_Grade_Dashboard)
 
   Projet 6 OpenClassroom / développeur d'application PHP Symfony
   
