@@ -24,3 +24,10 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+/composer.phar/
+/.php
+/php
+/.env
+/.env.test
+/.idea/
