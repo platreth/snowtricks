@@ -47,6 +47,5 @@ class CategoryData extends Fixture implements ContainerAwareInterface
         $category->setName("slides");
         $manager->persist($category);
         $manager->flush();
-
     }
 }

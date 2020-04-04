@@ -24,7 +24,8 @@ class TrickData extends Fixture implements ContainerAwareInterface
      */
     private $encoder;
 
-    public function __construct(UserPasswordEncoderInterface $encoder){
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
         $this->encoder = $encoder;
     }
 
@@ -55,8 +56,8 @@ class TrickData extends Fixture implements ContainerAwareInterface
         $manager->flush();
 
         if (file_exists("src/DataFixtures/images/image.jpg")) {
-        rename("src/DataFixtures/images/image.jpg", "public/uploads/picture/image.jpg");
-    }
+            rename("src/DataFixtures/images/image.jpg", "public/uploads/picture/image.jpg");
+        }
         for ($i = 1; $i <= 10; $i++) {
             $trick = new Trick();
             $user = $manager->getRepository(User::class)->findOneBy(array('email' => "hugo.platret@gmail.com"));

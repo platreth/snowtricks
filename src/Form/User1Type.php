@@ -19,8 +19,11 @@ class User1Type extends AbstractType
         $builder
             ->add('email')
             ->add('pseudo')
-            ->add('picture', FileType::class,['label'=> 'Picture', 'required'=> false, 'data_class'=> null, 'mapped'=>false])
-            ->add('plainPassword', HiddenType::class, array(
+            ->add('picture', FileType::class, ['label'=> 'Picture', 'required'=> false, 'data_class'=> null, 'mapped'=>false])
+            ->add(
+                'plainPassword',
+                HiddenType::class,
+                array(
                     'data' => 'abcdef',
                 )
             )

@@ -16,7 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 
-
 class AddVideoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -29,7 +28,6 @@ class AddVideoType extends AbstractType
                 "label" => "Ajouter une vidéo",
                 'attr' => array('accept' => 'video/*'),
             ]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

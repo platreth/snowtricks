@@ -25,7 +25,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class TrickController extends AbstractController
 {
     /**
@@ -46,11 +45,11 @@ class TrickController extends AbstractController
 
             foreach ($trick->getImages() as $image):
                 $picture = $filemanager->upload($image, $trick->getName(), 'picture', 'picture', 'setTrickImage', $trick);
-                array_push($array_picture, $picture);
+            array_push($array_picture, $picture);
             endforeach;
             foreach ($trick->getVideos() as $vid):
                 $video = $filemanager->upload($vid, $trick->getName(), 'video', 'video', 'setTrickVideo', $trick);
-                array_push($array_video, $video);
+            array_push($array_video, $video);
             endforeach;
 
             $trick->setVideos($array_video);
@@ -168,17 +167,17 @@ class TrickController extends AbstractController
      */
     public function delete(FileManager $fileManager, Request $request, Trick $trick): Response
     {
-            $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $this->getDoctrine()->getManager();
 
-            foreach ($trick->getImages() as $image) {
-                $fileManager->deleteFile($image);
-                $trick->removeImage($image);
-            }
-            foreach ($trick->getVideos() as $video) {
-                $fileManager->deleteFile($video);
-            }
-            $entityManager->remove($trick);
-            $entityManager->flush();
+        foreach ($trick->getImages() as $image) {
+            $fileManager->deleteFile($image);
+            $trick->removeImage($image);
+        }
+        foreach ($trick->getVideos() as $video) {
+            $fileManager->deleteFile($video);
+        }
+        $entityManager->remove($trick);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_homepage_index');
     }

@@ -16,7 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 
-
 class AddPictureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -29,7 +28,6 @@ class AddPictureType extends AbstractType
         "label" => "Ajouter une image",
             'attr' => array('accept' => 'image/*'),
     ]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

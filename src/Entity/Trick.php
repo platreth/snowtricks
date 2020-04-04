@@ -79,7 +79,8 @@ class Trick implements \JsonSerializable
         $this->comments = new ArrayCollection();
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return array(
             'id' => $this->id,
             'picture' => $this->getCover(),
@@ -284,5 +285,4 @@ class Trick implements \JsonSerializable
 
         return $this;
     }
-
 }

@@ -14,9 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-
-class FileController extends AbstractController {
+class FileController extends AbstractController
+{
 
     /**
      * @Route("/member/file/delete/{id}", name="file_delete", methods={"GET"})
@@ -50,14 +49,13 @@ class FileController extends AbstractController {
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception
      */
-    public function addImage(FileManager $fileManager, Request $request, EntityManagerInterface $entityManager, Trick $trick) {
-
+    public function addImage(FileManager $fileManager, Request $request, EntityManagerInterface $entityManager, Trick $trick)
+    {
         $form = $this->createForm(AddPictureType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $picture = $fileManager->upload($request->files->get('add_picture')['file'], $trick->getName(),  'picture', 'picture', 'setTrickImage', $trick);
+            $picture = $fileManager->upload($request->files->get('add_picture')['file'], $trick->getName(), 'picture', 'picture', 'setTrickImage', $trick);
             $trick->addImage($picture);
             $entityManager->persist($picture);
             $entityManager->flush();
@@ -80,13 +78,13 @@ class FileController extends AbstractController {
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception
      */
-    public function addVideo(FileManager $fileManager, Request $request, EntityManagerInterface $entityManager, Trick $trick) {
+    public function addVideo(FileManager $fileManager, Request $request, EntityManagerInterface $entityManager, Trick $trick)
+    {
         $form = $this->createForm(AddVideoType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $video = $fileManager->upload($request->files->get('add_video')['file'], $trick->getName(),  'video', 'video', 'setTrickVideo', $trick);
+            $video = $fileManager->upload($request->files->get('add_video')['file'], $trick->getName(), 'video', 'video', 'setTrickVideo', $trick);
             $trick->addImage($video);
             $entityManager->persist($video);
             $entityManager->flush();
@@ -98,5 +96,4 @@ class FileController extends AbstractController {
             'form' => $form->createView(),
         ]);
     }
-
 }

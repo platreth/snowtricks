@@ -82,7 +82,8 @@ class SecurityController extends AbstractController
                                 'token' => $userExist->getToken(),
                                 'email' => $userExist->getEmail()
                             )
-                        ), 'text/html'
+                        ),
+                        'text/html'
                     );
                 $mailer->send($message);
             }
@@ -108,7 +109,6 @@ class SecurityController extends AbstractController
      */
     public function resetPassword(Request $request, $token, $email, UserRepository $userRepository, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
     {
-
         $user = $userRepository->findOneBy(array('email' => $email));
 
         $form = $this->createForm(resetPasswordType::class, $user);

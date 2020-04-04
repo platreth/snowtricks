@@ -2,14 +2,12 @@
 // src/Service/SlugifyService.php
 namespace App\Services;
 
-
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class SlugifyService
 {
-
     private $em;
 
     /**
@@ -22,17 +20,17 @@ class SlugifyService
     }
 
 
-    public function generateSlugify($name, $class) {
-
+    public function generateSlugify($name, $class)
+    {
         $slug = $this->slugify($name);
 
-//Slugifier (mettre en minuscule tiret )*
-//Verfi bdd si nom existe -> -id
+        //Slugifier (mettre en minuscule tiret )*
+        //Verfi bdd si nom existe -> -id
         $trick = $this->em->getRepository($class)->findOneBySlug($slug);
         if ($trick) {
             return $slug . '-' . count($this->em->getRepository($class)->findAll());
         }
-            return $slug;
+        return $slug;
     }
 
     private function slugify($text)
@@ -61,5 +59,4 @@ class SlugifyService
 
         return $text;
     }
-
 }

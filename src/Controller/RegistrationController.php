@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Controller;
 
 use App\Form\UserType;
@@ -8,12 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class RegistrationController extends AbstractController {
+class RegistrationController extends AbstractController
+{
 
     /**
      * @Route("/register")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
         // 1) build the form
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -37,5 +39,4 @@ class RegistrationController extends AbstractController {
         }
         return $this->render('registration/register.html.twig', ['form' => $form->createView(), 'mainNavRegistration' => true, 'title' => 'Inscription']);
     }
-
 }

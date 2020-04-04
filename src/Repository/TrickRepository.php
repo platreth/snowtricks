@@ -20,9 +20,9 @@ class TrickRepository extends ServiceEntityRepository
         parent::__construct($registry, Trick::class);
     }
 
-     /**
-      * @return Trick[] Returns an array of Trick objects
-      */
+    /**
+     * @return Trick[] Returns an array of Trick objects
+     */
     public function findByTrickAjax($first, $max)
     {
         return $this->createQueryBuilder('t')
@@ -33,9 +33,9 @@ class TrickRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-     /**
-      * @return Trick[] Returns an array of Trick objects
-      */
+    /**
+     * @return Trick[] Returns an array of Trick objects
+     */
     public function findBySlug($slug)
     {
         return $this->createQueryBuilder('t')

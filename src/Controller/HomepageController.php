@@ -7,7 +7,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomepageController extends AbstractController {
+class HomepageController extends AbstractController
+{
 
     /**
      * @Route("/", name="app_homepage_index", methods={"GET"})
@@ -25,8 +26,8 @@ class HomepageController extends AbstractController {
      * @param int $first
      * @return JsonResponse
      */
-    public function loadMoreTrick(TrickRepository $trickRepository, int $first) {
+    public function loadMoreTrick(TrickRepository $trickRepository, int $first)
+    {
         return new JsonResponse($trickRepository->findByTrickAjax($first, 4));
     }
-
 }
