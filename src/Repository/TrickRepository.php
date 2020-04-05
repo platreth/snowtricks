@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,20 +15,33 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class TrickRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Trick::class);
     }
 
-     /**
-      * @return Trick[] Returns an array of Trick objects
-      */
+    /**
+     * @return Trick[] Returns an array of Trick objects
+     */
     public function findByTrickAjax($first, $max)
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.id', 'DESC')
             ->setFirstResult($first)
             ->setMaxResults($max)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    /**
+     * @return Trick[] Returns an array of Trick objects
+     */
+    public function findBySlug($slug)
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.id', 'DESC')
+            ->andWhere('t.slug = :val')
+            ->setParameter('val', $slug)
             ->getQuery()
             ->getResult()
         ;

@@ -56,7 +56,7 @@ class Trick implements \JsonSerializable
     private $videos;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $comments;
 
@@ -64,6 +64,11 @@ class Trick implements \JsonSerializable
      * @ORM\Column(type="string", length=255)
      */
     private $cover;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $slug;
 
 
 
@@ -74,12 +79,14 @@ class Trick implements \JsonSerializable
         $this->comments = new ArrayCollection();
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return array(
             'id' => $this->id,
             'picture' => $this->getCover(),
             'name' => $this->name,
-            'date_create' =>  $this->date_create->format('d-m-Y H:i'),
+            'date_create' =>  $this->date_create->format('d-m-Y'),
+            'slug' => $this->getSlug(),
 //            'pictureName' => $this->image->name
             );
     }
@@ -146,37 +153,6 @@ class Trick implements \JsonSerializable
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|File[]
-     */
-    public function getFile(): Collection
-    {
-        return $this->file;
-    }
-
-    public function addFile(File $file): self
-    {
-        if (!$this->file->contains($file)) {
-            $this->file[] = $file;
-            $file->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFile(File $file): self
-    {
-        if ($this->file->contains($file)) {
-            $this->file->removeElement($file);
-            // set the owning side to null (unless already changed)
-            if ($file->getTrick() === $this) {
-                $file->setTrick(null);
-            }
-        }
 
         return $this;
     }
@@ -298,4 +274,15 @@ class Trick implements \JsonSerializable
         return $this;
     }
 
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
 }

@@ -16,7 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 
-
 class TrickType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -71,7 +70,7 @@ class TrickType extends AbstractType
                'required' => true,
 
         ])
-        ->add('description',TextareaType::class, [
+        ->add('description', TextareaType::class, [
         'label' => 'Description de la figure'
     ]);
     }

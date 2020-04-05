@@ -13,7 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields="email")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable {
+class User implements UserInterface, \Serializable
+{
 
     /**
      * @ORM\Id
@@ -79,7 +80,8 @@ class User implements UserInterface, \Serializable {
     private $token;
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->isActive = true;
         $this->tricks = new ArrayCollection();
         $this->comments = new ArrayCollection();
@@ -87,41 +89,48 @@ class User implements UserInterface, \Serializable {
         // $this->salt = md5(uniqid('', true));
     }
 
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->email;
     }
 
-    public function getSalt() {
+    public function getSalt()
+    {
         // you *may* need a real salt depending on your encoder
         // see section on salt below
         return null;
     }
 
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    function setPassword($password) {
+    public function setPassword($password)
+    {
         $this->password = $password;
     }
 
-    public function getRoles() {
+    public function getRoles()
+    {
         if (empty($this->roles)) {
             return ['ROLE_USER'];
         }
         return $this->roles;
     }
 
-    function addRole($role) {
+    public function addRole($role)
+    {
         $this->roles[] = $role;
     }
 
-    public function eraseCredentials() {
-        
+    public function eraseCredentials()
+    {
     }
 
     /** @see \Serializable::serialize() */
-    public function serialize() {
+    public function serialize()
+    {
         return serialize(array(
             $this->id,
             $this->email,
@@ -133,8 +142,9 @@ class User implements UserInterface, \Serializable {
     }
 
     /** @see \Serializable::unserialize() */
-    public function unserialize($serialized) {
-        list (
+    public function unserialize($serialized)
+    {
+        list(
                 $this->id,
                 $this->email,
                 $this->password,
@@ -144,35 +154,43 @@ class User implements UserInterface, \Serializable {
                 ) = unserialize($serialized);
     }
 
-    function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    function getPlainPassword() {
+    public function getPlainPassword()
+    {
         return $this->plainPassword;
     }
 
-    function getIsActive() {
+    public function getIsActive()
+    {
         return $this->isActive;
     }
 
-    function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    function setPlainPassword($plainPassword) {
+    public function setPlainPassword($plainPassword)
+    {
         $this->plainPassword = $plainPassword;
     }
 
-    function setIsActive($isActive) {
+    public function setIsActive($isActive)
+    {
         $this->isActive = $isActive;
     }
 
@@ -281,8 +299,8 @@ class User implements UserInterface, \Serializable {
         return $this;
     }
 
-    public function reloadToken() {
+    public function reloadToken()
+    {
         $this->setToken(bin2hex(random_bytes(16)));
     }
-
 }

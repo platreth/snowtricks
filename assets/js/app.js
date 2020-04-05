@@ -31,10 +31,10 @@ $('.loadMoreAjax').click(function () {
             html += '<img class="embed-responsive-item" src="/uploads/picture/'+ trick.picture + '" >';
             html +='</div></div><div class="card-body">';
 
-                html += '<a href="trick/'+ trick.id +'">' +
+                html += '<a href="trick/'+ trick.slug +'">' +
                 '<h4 class="card-title">' + trick.name + '</h4> <p class="card-text"> </p> </a>' +
                 '<p class="card-text">' + trick.date_create  + ' </p>' +
-                '<a href="/member/trick/edit/'+ trick.id +'"><div class="edit"></div></a> <div class="delete" data-toggle="modal" data-target="#basicExampleModal_'+ trick.id+'"></div> </div> </div>'+
+                '<a href="/member/trick/edit/'+ trick.slug +'"><div class="edit"></div></a> <div class="delete" data-toggle="modal" data-target="#basicExampleModal_'+ trick.id+'"></div> </div> </div>'+
             '<div class="modal fade" id="basicExampleModal_'+ trick.id+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel_'+ trick.id+'" aria-hidden="true">' +
                 '<div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="exampleModalLabel_'+ trick.id+'">Supprimer</h5>'+
                 '<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>'+

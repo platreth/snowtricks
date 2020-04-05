@@ -25,7 +25,8 @@ class FileManager
     /**
      * @return mixed
      */
-    private function getTargetDirectory() {
+    private function getTargetDirectory()
+    {
         return $this->params->get("picture_directory");
     }
 
@@ -51,21 +52,20 @@ class FileManager
             ->setType($type);
         try {
             $file->move($this->getTargetDirectory() . '/' . $path, $fileName);
-        }
-        catch (FileException $e) {
+        } catch (FileException $e) {
         }
         $newFile->$setterMethod($setterObject);
         return $newFile;
     }
 
-    public function simpleUpload(UploadedFile $file, $path) {
+    public function simpleUpload(UploadedFile $file, $path)
+    {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
         try {
             $file->move($this->getTargetDirectory() . '/' . $path, $fileName);
-        }
-        catch (FileException $e) {
+        } catch (FileException $e) {
         }
         return $fileName;
     }
@@ -73,12 +73,12 @@ class FileManager
     /**
      * @param File $file
      */
-    public function deleteFile(File $file) {
+    public function deleteFile(File $file)
+    {
         $fileSystem = new Filesystem();
         try {
             $fileSystem->remove($this->getTargetDirectory() . $file->getName());
-        }
-        catch (IOExceptionInterface $exception) {
+        } catch (IOExceptionInterface $exception) {
         }
     }
 }
